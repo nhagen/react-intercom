@@ -10,24 +10,7 @@ export default class Intercom extends React.Component {
   constructor(props) {
     super(props);
 
-    window.intercomSettings = { app_id: props.appID };
-
-    if (typeof window.intercom === 'function') {
-      window.Intercom('boot', {
-        app_id: props.appID
-      });
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // do stuff when user changes
-  }
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  componentDidMount() {
-    if (typeof window.Intercom === "function" || !this.props.intercomAppID) {
+    if (typeof window.Intercom === "function" || !props.appID) {
         return;
     }
     (function(w, d, id, s, x) {
@@ -44,7 +27,24 @@ export default class Intercom extends React.Component {
         s.src = 'https://widget.intercom.io/widget/' + id;
         x = d.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
-    })(window, document, this.props.intercomAppID);
+    })(window, document, props.appID);
+
+    window.intercomSettings = props;
+
+    if (typeof window.intercom === 'function') {
+      window.Intercom('boot', {
+        app_id: props.appID
+      });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    window.intercomSettings = nextProps;
+    window.Intercom('update');
+  }
+
+  shouldComponentUpdate() {
+    return false;
   }
 
   render() {
