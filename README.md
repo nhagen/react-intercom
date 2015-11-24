@@ -15,10 +15,7 @@ This loads the javascript required to boot Intercom, and will update the setting
 
 ```
 import { IntercomAPI } from 'react-intercom';
-
-...
-
-  IntercomAPI('trackEvent', 'invited-friend');
+IntercomAPI('trackEvent', 'invited-friend');
 ```
 
 This is, of course, equivalent to just calling `window.Intercom('trackEvent', 'invited-friend');` or even `Intercom('trackEvent', 'invited-friend');`.
