@@ -2,7 +2,7 @@
 A compont to configure and enable Intercom in your react application
 
 ## Installation
-`npm i react-intercom --save-dev`
+```npm i react-intercom --save-dev```
 
 ## Usage
 Inside of your application where you would be running Intercom, insert `Intercom`:
