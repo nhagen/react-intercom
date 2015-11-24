@@ -1,5 +1,7 @@
 import React from 'react';
 
+export let IntercomAPI = window.Intercom || function() { console.warn('Intercome not initialized yet') };
+
 export default class Intercom extends React.Component {
   static propTypes = {
     appID: React.PropTypes.string.isRequired
@@ -23,6 +25,7 @@ export default class Intercom extends React.Component {
         };
         w.Intercom = i;
         s = d.createElement('script');
+        s.onload = function() { IntercomAPI = window.Intercom };
         s.async = 1;
         s.src = 'https://widget.intercom.io/widget/' + id;
         x = d.getElementsByTagName('script')[0];
@@ -31,10 +34,8 @@ export default class Intercom extends React.Component {
 
     window.intercomSettings = props;
 
-    if (typeof window.intercom === 'function') {
-      window.Intercom('boot', {
-        app_id: props.appID
-      });
+    if (typeof window.Intercom === 'function') {
+      window.Intercom('boot', props);
     }
   }
 
