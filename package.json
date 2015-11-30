@@ -1,6 +1,6 @@
 {
   "name": "react-intercom",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A component to initialize Intercom in your application",
   "main": "lib/index.js",
   "dependencies": {
