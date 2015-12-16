@@ -49,7 +49,7 @@ export default class Intercom extends React.Component {
   }
 
   componentWillUnmount() {
-    window.Intercom('shudown');
+    window.Intercom('shutdown');
   }
 
   render() {
