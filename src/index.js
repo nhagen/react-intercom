@@ -1,6 +1,6 @@
 import React from 'react';
 
-export let IntercomAPI = window.Intercom || function() { console.warn('Intercome not initialized yet') };
+export let IntercomAPI = window.Intercom || function() { console.warn('Intercom not initialized yet') };
 
 export default class Intercom extends React.Component {
   static propTypes = {
