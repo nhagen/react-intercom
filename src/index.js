@@ -15,7 +15,7 @@ export default class Intercom extends Component {
 
     const appID = props.appID || props.app_id;
 
-    if (typeof window.Intercom === "function" || !appID) {
+    if (!appID) {
         return;
     }
     (function(w, d, id, s, x) {
@@ -35,7 +35,7 @@ export default class Intercom extends Component {
         x.parentNode.insertBefore(s, x);
     })(window, document, appID);
 
-    window.intercomSettings = props;
+    window.intercomSettings = { ...props.settings, app_id: appID };
 
     if (typeof window.Intercom === 'function') {
       window.Intercom('boot', props);
@@ -43,7 +43,9 @@ export default class Intercom extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    window.intercomSettings = nextProps;
+    const appID = nextProps.appID || nextProps.app_id;
+
+    window.intercomSettings = { ...nextProps.settings, app_id: appID };
     window.Intercom('update');
   }
 
