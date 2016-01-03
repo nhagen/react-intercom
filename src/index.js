@@ -18,26 +18,29 @@ export default class Intercom extends Component {
     if (!appID) {
         return;
     }
-    (function(w, d, id, s, x) {
-        function i() {
-            i.c(arguments);
-        }
-        i.q = [];
-        i.c = function(args) {
-            i.q.push(args);
-        };
-        w.Intercom = i;
-        s = d.createElement('script');
-        s.onload = function() { IntercomAPI = window.Intercom };
-        s.async = 1;
-        s.src = 'https://widget.intercom.io/widget/' + id;
-        x = d.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-    })(window, document, appID);
+
+    if (!window.Intercom) {
+      (function(w, d, id, s, x) {
+          function i() {
+              i.c(arguments);
+          }
+          i.q = [];
+          i.c = function(args) {
+              i.q.push(args);
+          };
+          w.Intercom = i;
+          s = d.createElement('script');
+          s.onload = function() { IntercomAPI = window.Intercom };
+          s.async = 1;
+          s.src = 'https://widget.intercom.io/widget/' + id;
+          x = d.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+      })(window, document, appID);
+    };
 
     window.intercomSettings = { ...props.settings, app_id: appID };
 
-    if (typeof window.Intercom === 'function') {
+    if (window.Intercom) {
       window.Intercom('boot', props);
     }
   }
