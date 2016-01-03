@@ -1,4 +1,4 @@
-import React. { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export let IntercomAPI = window.Intercom || function() { console.warn('Intercome not initialized yet') };
 
