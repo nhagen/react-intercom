@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export let IntercomAPI = window.Intercom || function() { console.warn('Intercome not initialized yet') };
 
-export default class Intercom extends React.Component {
+export default class Intercom extends Component {
   static propTypes = {
-    appID: React.PropTypes.string.isRequired
+    appID: PropTypes.string,
+    app_id: PropTypes.string,
   }
 
   static displayName = 'Intercom'
@@ -12,35 +13,42 @@ export default class Intercom extends React.Component {
   constructor(props) {
     super(props);
 
-    if (typeof window.Intercom === "function" || !props.appID) {
+    const appID = props.appID || props.app_id;
+
+    if (!appID) {
         return;
     }
-    (function(w, d, id, s, x) {
-        function i() {
-            i.c(arguments);
-        }
-        i.q = [];
-        i.c = function(args) {
-            i.q.push(args);
-        };
-        w.Intercom = i;
-        s = d.createElement('script');
-        s.onload = function() { IntercomAPI = window.Intercom };
-        s.async = 1;
-        s.src = 'https://widget.intercom.io/widget/' + id;
-        x = d.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-    })(window, document, props.appID);
 
-    window.intercomSettings = props;
+    if (!window.Intercom) {
+      (function(w, d, id, s, x) {
+          function i() {
+              i.c(arguments);
+          }
+          i.q = [];
+          i.c = function(args) {
+              i.q.push(args);
+          };
+          w.Intercom = i;
+          s = d.createElement('script');
+          s.onload = function() { IntercomAPI = window.Intercom };
+          s.async = 1;
+          s.src = 'https://widget.intercom.io/widget/' + id;
+          x = d.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+      })(window, document, appID);
+    };
 
-    if (typeof window.Intercom === 'function') {
+    window.intercomSettings = { ...props.settings, app_id: appID };
+
+    if (window.Intercom) {
       window.Intercom('boot', props);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    window.intercomSettings = nextProps;
+    const appID = nextProps.appID || nextProps.app_id;
+
+    window.intercomSettings = { ...nextProps.settings, app_id: appID };
     window.Intercom('update');
   }
 
@@ -49,7 +57,7 @@ export default class Intercom extends React.Component {
   }
 
   componentWillUnmount() {
-    window.Intercom('shudown');
+    window.Intercom('shutdown');
   }
 
   render() {
