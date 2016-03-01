@@ -6,6 +6,7 @@ export default class Intercom extends Component {
   static propTypes = {
     appID: PropTypes.string,
     app_id: PropTypes.string,
+    settings: PropTypes.object
   };
 
   static displayName = 'Intercom';
