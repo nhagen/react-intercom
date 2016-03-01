@@ -5,8 +5,7 @@ export let IntercomAPI = window.Intercom || function() { console.warn('Intercom 
 export default class Intercom extends Component {
   static propTypes = {
     appID: PropTypes.string,
-    app_id: PropTypes.string,
-    settings: PropTypes.object
+    app_id: PropTypes.string
   };
 
   static displayName = 'Intercom';
@@ -39,7 +38,7 @@ export default class Intercom extends Component {
       })(window, document, appID);
     };
 
-    window.intercomSettings = { ...props.settings, app_id: appID };
+    window.intercomSettings = { ...props, app_id: appID };
 
     if (window.Intercom) {
       window.Intercom('boot', props);
@@ -49,7 +48,7 @@ export default class Intercom extends Component {
   componentWillReceiveProps(nextProps) {
     const appID = nextProps.appID || nextProps.app_id;
 
-    window.intercomSettings = { ...nextProps.settings, app_id: appID };
+    window.intercomSettings = { ...nextProps, app_id: appID };
     window.Intercom('update');
   }
 
