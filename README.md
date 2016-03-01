@@ -9,7 +9,13 @@ npm i react-intercom --save-dev
 ## Usage
 Inside of your application where you would be running Intercom, insert `Intercom`:
 ```
-<Intercom appID="az33rewf" userID={ user.id } otherUserProp={ user.otherUserProp } />
+<Intercom
+  appID="az33rewf"
+  settings={{
+    user_id: user.id,
+    email: user.email,
+    name: user.name
+    }} />
 ```
 This loads the javascript required to boot Intercom, and will update the settings when the props change. For example, when the active user changes in the application, new props should be passed to reflect that, and Intercom will be registering the new user. `react-intercom` also exports the singleton `window.Intercom` if you'd rather interact with a module than `window`. For example, where you'd like to log an event in your application:
 
