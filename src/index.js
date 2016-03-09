@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+const canUseDOM = !!(
+  (typeof window !== 'undefined' &&
+  window.document && window.document.createElement)
+);
 
-export let IntercomAPI = window.Intercom || function() { console.warn('Intercom not initialized yet') };
+export let IntercomAPI = (canUseDOM && window.Intercom) || function() { console.warn('Intercom not initialized yet') };
 
 export default class Intercom extends Component {
   static propTypes = {
@@ -15,26 +19,26 @@ export default class Intercom extends Component {
 
     const appID = props.appID || props.app_id;
 
-    if (!appID) {
-        return;
+    if (!appID || !canUseDOM) {
+      return;
     }
 
     if (!window.Intercom) {
       (function(w, d, id, s, x) {
-          function i() {
-              i.c(arguments);
-          }
-          i.q = [];
-          i.c = function(args) {
-              i.q.push(args);
-          };
-          w.Intercom = i;
-          s = d.createElement('script');
-          s.onload = function() { IntercomAPI = window.Intercom };
-          s.async = 1;
-          s.src = 'https://widget.intercom.io/widget/' + id;
-          x = d.getElementsByTagName('script')[0];
-          x.parentNode.insertBefore(s, x);
+        function i() {
+            i.c(arguments);
+        }
+        i.q = [];
+        i.c = function(args) {
+            i.q.push(args);
+        };
+        w.Intercom = i;
+        s = d.createElement('script');
+        s.onload = function() { IntercomAPI = window.Intercom };
+        s.async = 1;
+        s.src = 'https://widget.intercom.io/widget/' + id;
+        x = d.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
       })(window, document, appID);
     };
 
@@ -48,6 +52,8 @@ export default class Intercom extends Component {
   componentWillReceiveProps(nextProps) {
     const appID = nextProps.appID || nextProps.app_id;
 
+    if (!canUseDOM) return;
+
     window.intercomSettings = { ...nextProps, app_id: appID };
     window.Intercom('update');
   }
@@ -57,6 +63,8 @@ export default class Intercom extends Component {
   }
 
   componentWillUnmount() {
+    if (!canUseDOM) return false;
+
     window.Intercom('shutdown');
   }
 
