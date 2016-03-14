@@ -55,7 +55,7 @@ export default class Intercom extends Component {
     if (!canUseDOM) return;
 
     window.intercomSettings = { ...nextProps, app_id: appID };
-    window.Intercom('update');
+    window.Intercom('update', nextProps);
   }
 
   shouldComponentUpdate() {
