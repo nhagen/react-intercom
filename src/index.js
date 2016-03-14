@@ -66,6 +66,8 @@ export default class Intercom extends Component {
     if (!canUseDOM) return false;
 
     window.Intercom('shutdown');
+
+    delete window.Intercom;
   }
 
   render() {
