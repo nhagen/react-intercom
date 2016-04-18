@@ -3,7 +3,7 @@ A compont to configure and enable Intercom in your react application
 
 ## Installation
 ```
-npm i react-intercom --save-dev
+npm i react-intercom --save
 ```
 
 ## Usage
