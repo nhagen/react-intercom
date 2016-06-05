@@ -17,7 +17,10 @@ export default class Intercom extends Component {
   constructor(props) {
     super(props);
 
-    const appID = props.appID || props.app_id;
+    const {
+      appID,
+      ...otherProps,
+    } = props;
 
     if (!appID || !canUseDOM) {
       return;
@@ -40,22 +43,25 @@ export default class Intercom extends Component {
         x = d.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
       })(window, document, appID);
-    };
+    }
 
-    window.intercomSettings = { ...props, app_id: appID };
+    window.intercomSettings = { ...otherProps, app_id: appID };
 
     if (window.Intercom) {
-      window.Intercom('boot', props);
+      window.Intercom('boot', otherProps);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const appID = nextProps.appID || nextProps.app_id;
+    const {
+      appID,
+      ...otherProps,
+    } = nextProps;
 
     if (!canUseDOM) return;
 
-    window.intercomSettings = { ...nextProps, app_id: appID };
-    window.Intercom('update', nextProps);
+    window.intercomSettings = { ...otherProps, app_id: appID };
+    window.Intercom('update', otherProps);
   }
 
   shouldComponentUpdate() {
