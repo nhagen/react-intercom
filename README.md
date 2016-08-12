@@ -8,6 +8,7 @@ npm i react-intercom --save
 
 ## Usage
 Inside of your application where you would be running Intercom, insert `Intercom`:
+Please note that you will have to make sure that the Intercom component's parent does not rerender itself.
 ```
 export class App extends React.Component {
 
