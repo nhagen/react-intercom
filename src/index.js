@@ -36,7 +36,7 @@ export default class Intercom extends Component {
     return false;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {
       appID,
       ...otherProps,
