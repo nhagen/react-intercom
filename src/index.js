@@ -20,18 +20,31 @@ export default class Intercom extends Component {
 
   static displayName = 'Intercom';
 
-  constructor(props) {
-    super(props);
-
+  componentWillReceiveProps(nextProps) {
     const {
       appID,
       ...otherProps,
-    } = props;
+    } = nextProps;
+
+    if (!canUseDOM) return;
+
+    window.intercomSettings = { ...otherProps, app_id: appID };
+    window.Intercom('update', otherProps);
+  }
+
+  shouldComponentUpdate() {
+    return false;
+  }
+
+  componentWillMount() {
+    const {
+      appID,
+      ...otherProps,
+    } = this.props;
 
     if (!appID || !canUseDOM) {
       return;
     }
-
     if (!window.Intercom) {
       (function(w, d, id, s, x) {
         function i() {
