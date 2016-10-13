@@ -4,7 +4,13 @@ const canUseDOM = !!(
   window.document && window.document.createElement)
 );
 
-export let IntercomAPI = (canUseDOM && window.Intercom) || function() { console.warn('Intercom not initialized yet') };
+export const IntercomAPI = (...args) => {
+  if (canUseDOM && window.Intercom) {
+    window.Intercom.apply(null, args);
+  } else {
+    console.warn('Intercom not initialized yet');
+  }
+};
 
 export default class Intercom extends Component {
   static propTypes = {
@@ -37,7 +43,6 @@ export default class Intercom extends Component {
         };
         w.Intercom = i;
         s = d.createElement('script');
-        s.onload = function() { IntercomAPI = window.Intercom };
         s.async = 1;
         s.src = 'https://widget.intercom.io/widget/' + id;
         x = d.getElementsByTagName('script')[0];
