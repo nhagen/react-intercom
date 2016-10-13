@@ -1,5 +1,5 @@
 # react-intercom
-A compont to configure and enable Intercom in your react application
+A component to configure and enable Intercom in your react application. `react-intercom` is meant to support both the legacy and current versions of intercom messenger. If you run into issues, please submit an issue. Pull requests are also welcome!
 
 ## Installation
 ```bash
