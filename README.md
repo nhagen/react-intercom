@@ -9,13 +9,18 @@ npm i react-intercom --save
 ## Usage
 Inside of your application where you would be running Intercom, insert `Intercom`:
 ```
+import React from 'react';
+import Intercom from 'react-intercom';
+
 export class App extends React.Component {
 
   render () {
+    const { appUser } = this.props;
+    
     const user = {
-      user_id: user.id,
-      email: user.email,
-      name: user.name
+      user_id: appUser.id,
+      email: appUser.email,
+      name: appUser.name
     };
 
     return (
