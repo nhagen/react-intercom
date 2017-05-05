@@ -3,13 +3,14 @@
   "version": "1.0.12",
   "description": "A component to initialize Intercom in your application",
   "main": "lib/index.js",
-  "dependencies": {},
+  "dependencies": {
+    "prop-types": "15.5.8"
+  },
   "devDependencies": {
     "babel-cli": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
-    "babel-preset-stage-0": "^6.1.18",
-    "prop-types": "15.5.8"
+    "babel-preset-stage-0": "^6.1.18"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
