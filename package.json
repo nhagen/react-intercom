@@ -15,7 +15,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "babel --presets es2015,react,stage-0 -d lib/ src/",
-    "prepublish": "npm run compile"
+    "prepublishOnly": "npm run compile"
   },
   "repository": {
     "type": "git",
