@@ -5,4 +5,4 @@ export interface IReactIntercomProps {
   [key: string]: any;
 }
 
-export default class Intercom extends React.Component<IReactIntercomProps> {}
+export default class Intercom extends Component<IReactIntercomProps> {}
