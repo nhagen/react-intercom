@@ -87,6 +87,7 @@ export default class Intercom extends Component {
     window.Intercom('shutdown');
 
     delete window.Intercom;
+    delete window.intercomSettings;
   }
 
   loggedIn(props) {
