@@ -26,7 +26,7 @@ export default class Intercom extends Component {
       ...otherProps,
     } = this.props;
 
-    if (!appID || !canUseDOM) {
+    if (!appID) {
       return;
     }
     if (!window.Intercom) {
@@ -59,8 +59,6 @@ export default class Intercom extends Component {
       ...otherProps,
     } = nextProps;
 
-    if (!canUseDOM) return;
-
     window.intercomSettings = { ...otherProps, app_id: appID };
 
     if (window.Intercom) {
@@ -75,7 +73,7 @@ export default class Intercom extends Component {
   }
 
   componentWillUnmount() {
-    if (!canUseDOM || !window.Intercom) return false;
+    if (!window.Intercom) return false;
 
     window.Intercom('shutdown');
 
