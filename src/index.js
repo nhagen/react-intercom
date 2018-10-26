@@ -20,22 +20,6 @@ export default class Intercom extends Component {
 
   static displayName = 'Intercom';
 
-  componentWillReceiveProps(nextProps) {
-    const {
-      appID,
-      ...otherProps,
-    } = nextProps;
-
-    if (!canUseDOM) return;
-
-    window.intercomSettings = { ...otherProps, app_id: appID };
-    window.Intercom('update', otherProps);
-  }
-
-  shouldComponentUpdate() {
-    return false;
-  }
-
   componentDidMount() {
     const {
       appID,
@@ -69,7 +53,7 @@ export default class Intercom extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const {
       appID,
       ...otherProps,
@@ -80,7 +64,7 @@ export default class Intercom extends Component {
     window.intercomSettings = { ...otherProps, app_id: appID };
 
     if (window.Intercom) {
-      if (this.loggedIn(this.props) && !this.loggedIn(nextProps)) {
+      if (this.loggedIn(prevProps) && !this.loggedIn(this.props)) {
         // Shutdown and boot each time the user logs out to clear conversations
         window.Intercom('shutdown');
         window.Intercom('boot', otherProps);
@@ -88,10 +72,6 @@ export default class Intercom extends Component {
         window.Intercom('update', otherProps);
       }
     }
-  }
-
-  shouldComponentUpdate() {
-    return false;
   }
 
   componentWillUnmount() {
