@@ -39,3 +39,26 @@ IntercomAPI('trackEvent', 'invited-friend');
 ```
 
 This is, of course, equivalent to just calling `window.Intercom('trackEvent', 'invited-friend');` or even `Intercom('trackEvent', 'invited-friend');`.
+
+## Tell Intercom when your URL changes
+For single paged apps or pages where the URL changes without a full page reload, you will need to pass the **locationKey** prop in order to initiate a "ping" every time a URL changes. Alternatively, you can call `IntercomAPI('update')` or `window.Intercom('update')`.
+
+
+```js
+render () {
+  // location could come from react-router or the router of your choice
+  const { appUser, location } = this.props;
+
+  const user = {
+    user_id: appUser.id,
+    email: appUser.email,
+    name: appUser.name
+  };
+
+  return (
+    <div className="app">
+  	  <Intercom appID="az33rewf" locationKey={location.pathname} { ...user } />
+    </div>
+  );
+}
+```

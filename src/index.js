@@ -16,6 +16,7 @@ export const IntercomAPI = (...args) => {
 export default class Intercom extends Component {
   static propTypes = {
     appID: PropTypes.string.isRequired,
+    locationKey: PropTypes.string
   };
 
   static displayName = 'Intercom';
@@ -25,6 +26,7 @@ export default class Intercom extends Component {
 
     const {
       appID,
+      locationKey,
       ...otherProps,
     } = props;
 
@@ -59,6 +61,7 @@ export default class Intercom extends Component {
   componentWillReceiveProps(nextProps) {
     const {
       appID,
+      locationKey,
       ...otherProps,
     } = nextProps;
 
@@ -73,6 +76,9 @@ export default class Intercom extends Component {
         window.Intercom('boot', otherProps);
       } else {
         window.Intercom('update', otherProps);
+      }
+      if (locationKey !== this.props.locationKey) {
+        window.Intercom('update');
       }
     }
   }
