@@ -6,3 +6,4 @@ export interface IReactIntercomProps {
 }
 
 export default class Intercom extends Component<IReactIntercomProps> {}
+export function IntercomAPI(...args: any[]): void;
