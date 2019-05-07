@@ -1,7 +1,7 @@
 {
-  "name": "react-intercom",
-  "version": "1.0.15",
-  "description": "A component to initialize Intercom in your application",
+  "name": "@skillsets/react-intercom",
+  "version": "1.0.0",
+  "description": "A fork exporting types for IntercomAPI",
   "main": "lib/index.js",
   "dependencies": {
     "prop-types": "15.5.8"
