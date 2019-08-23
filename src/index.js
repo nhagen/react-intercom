@@ -56,7 +56,23 @@ export default class Intercom extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  shouldComponentUpdate(nextProps) {
+    // Doing in next tick to immediately return false for the sCU
+    setTimeout(this.reInit, 0, nextProps);
+
+    return false;
+  }
+
+  componentWillUnmount() {
+    if (!canUseDOM || !window.Intercom) return false;
+
+    window.Intercom('shutdown');
+
+    delete window.Intercom;
+    delete window.intercomSettings;
+  }
+
+  reInit(nextProps) {
     const {
       appID,
       ...otherProps,
@@ -75,19 +91,6 @@ export default class Intercom extends Component {
         window.Intercom('update', otherProps);
       }
     }
-  }
-
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  componentWillUnmount() {
-    if (!canUseDOM || !window.Intercom) return false;
-
-    window.Intercom('shutdown');
-
-    delete window.Intercom;
-    delete window.intercomSettings;
   }
 
   loggedIn(props) {
