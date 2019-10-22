@@ -57,7 +57,7 @@ interface ReactIntercomProps extends ReactIntercomDataAttributes {
   horizontal_padding?: Number;
   vertical_padding?: Number;
   custom_launcher_selector?: string;
-  hide_default_launcher?: string;
+  hide_default_launcher?: boolean;
   session_duration?: string;
   action_color?: string;
   background_color?: string;
