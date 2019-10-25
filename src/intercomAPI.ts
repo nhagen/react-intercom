@@ -1,6 +1,6 @@
-export default function(method: string, ...args: Array<any>) {
+export default function(...args: [string, ...Array<any>]) {
   if (window.Intercom) {
-    window.Intercom.apply(null, [method, args]);
+    window.Intercom.apply(null, args);
   } else {
     console.warn('Intercom not initialized yet');
   }
