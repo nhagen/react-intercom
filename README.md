@@ -63,7 +63,7 @@ function App ({ user }) {
           <ReactIntercom
             app_id="your_app_id"
             user_id={ user.id }
-            user_email={ user.email }
+            email={ user.email }
             name={ user.name } />
         </Suspense>
       )}
