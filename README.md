@@ -25,7 +25,7 @@ export class App extends React.Component {
 
     return (
       <div className="app">
-        <Intercom appID="az33rewf" { ...user } />
+        <Intercom appId="az33rewf" { ...user } />
       </div>
     );
   }
