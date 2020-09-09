@@ -1,3 +1,9 @@
+> ## This package is no longer maintained
+> 
+> ### This is an unofficial package, is not maintined by Intercom, and now should now be considered _deprecated_. I can not recommend using external dependencies to manage adding simple scripts to your page. [Please refer to official Intercom documentation for installation instructions.](https://www.intercom.com/help/en/articles/170-integrate-intercom-in-a-single-page-app)
+
+Installing Intercom (and other similar third party scripts) is trivial without using a package like `react-intercom`. Using an unofficial dependency to do so may be convenient, but ultimately is not something I recommend. Unnecessary third party dependencies introduce unnecessary security risks and compatibility risk. If you'd like to maintain an internal version of this package, please fork this repo or use this package as a guide on how that can be done. Its easy!
+
 # react-intercom
 A component to configure and enable Intercom in your react application. `react-intercom` is meant to support both the legacy and current versions of intercom messenger. If you run into issues, please submit an issue. Pull requests are also welcome!
 
