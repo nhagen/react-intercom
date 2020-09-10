@@ -7,6 +7,9 @@ Installing Intercom (and other similar third party scripts) is trivial without u
 # react-intercom
 A component to configure and enable Intercom in your react application. `react-intercom` is meant to support both the legacy and current versions of intercom messenger. If you run into issues, please submit an issue. Pull requests are also welcome!
 
+[Link to the full Intercom Javascript API](https://developers.intercom.com/installing-intercom/docs/intercom-javascript)
+
+
 ## Installation
 ```bash
 npm i react-intercom --save
